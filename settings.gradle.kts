@@ -1,21 +1,22 @@
 pluginManagement {
     repositories {
-        maven { url = uri("https://mvn-mirror.gitverse.ru") }
-        google()
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        mavenCentral()
         gradlePluginPortal()
     }
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        maven { url = uri("https://mvn-mirror.gitverse.ru") }
         google()
+        mavenCentral()
     }
-}
-plugins {
-    alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.kotlin.android) apply false
-    alias(libs.plugins.kotlin.kapt) apply false
 }
 
 rootProject.name = "UNIVER"
