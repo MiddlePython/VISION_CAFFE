@@ -1,9 +1,7 @@
 plugins {
-    // Строковый синтаксис железобетонно связывает плагины с каталогом и версиями проекта
-    apply(plugin = "com.android.application")
-    apply(plugin = "org.jetbrains.kotlin.android")
-    apply(plugin = "org.jetbrains.kotlin.kapt")
-
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -52,25 +50,22 @@ dependencies {
     implementation("androidx.camera:camera-lifecycle:1.4.0")
     implementation("androidx.camera:camera-view:1.4.0")
 
-    // ML Kit Text Recognition (ИСПРАВЛЕНО: теперь версия строго 19.0.0, а не 190.0)
+    // ML Kit Text Recognition (для авто-распознавания веса)
     implementation("com.google.android.gms:play-services-mlkit-text-recognition:19.0.0")
 
-    // Локальная База Данных Room (для хранения меню)
+    // Локальная База Данных Room (для хранения меню, чтобы данные не стирались)
     val room_version = "2.6.1"
     implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
 
-    // Используем строковую конфигурацию — она работает стабильно в любых версиях Gradle
-    "kapt"("androidx.room:room-compiler:$room_version")
-
-    // Компоненты UI (Сетки, карточки в стиле iiko)
+    // Компоненты UI (Сетки, карточки, меню в стиле iiko)
     implementation("com.google.android.material:material:1.12.0")
 
     // Coil (для асинхронной загрузки картинок)
     implementation("io.coil-kt:coil:2.6.0")
 }
 
-// Современный синтаксис таргета Java компилятора Kotlin
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     compilerOptions {
         jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
