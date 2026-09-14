@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://android.com"
     xmlns:app="http://android.com"
     xmlns:tools="http://android.com"
     android:layout_width="match_parent"
@@ -8,18 +8,19 @@
     android:background="#F4F6F9"
     android:baselineAligned="false">
 
-    <!-- ЛЕВАЯ ПАНЕЛЬ -->
+    <!-- ЛЕВАЯ ПАНЕЛЬ: Камера (уменьшенная), Вес и Итоги -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="4.5"
+        android:layout_weight="4.3"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="12dp">
 
+        <!-- Область камеры (Высота уменьшена до 150dp, чтобы поместилась тара) -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            app:cardCornerRadius="16dp"
+            android:layout_height="140dp"
+            app:cardCornerRadius="12dp"
             app:cardElevation="2dp"
             app:strokeWidth="0dp">
 
@@ -34,14 +35,15 @@
             </FrameLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Выбор Тары -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Выберите тару:"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:textStyle="bold"
             android:textColor="#555555"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="4dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -49,15 +51,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_plate_card"/>
 
+        <!-- Расчеты стоимости -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            app:cardCornerRadius="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="12dp"
             app:cardElevation="3dp"
             app:strokeWidth="1dp"
             app:strokeColor="#0088CC">
@@ -66,15 +70,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="16dp"
+                android:padding="12dp"
                 android:gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/tvDishName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Выберите блюдо в меню справа"
-                    android:textSize="22sp"
+                    android:text="Выберите блюдо справа"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="#212121" />
 
@@ -82,17 +86,17 @@
                     android:id="@+id/tvWeightInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Вес нетто: 0 г (Тара: 220 г | Брутто: 0 г)"
-                    android:textSize="15sp"
+                    android:text="Вес нетто: 0 г (Тара: 220 г)"
+                    android:textSize="14sp"
                     android:textColor="#666666"
-                    android:layout_marginTop="4dp" />
+                    android:layout_marginTop="2dp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#E0E0E0"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"/>
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -103,7 +107,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="ИТОГО К ОПЛАТЕ:"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:textStyle="bold"
                         android:textColor="#757575"/>
 
@@ -113,16 +117,17 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:text="0.00 ₽"
-                        android:textSize="32sp"
+                        android:textSize="28sp"
                         android:textStyle="bold"
                         android:textColor="#0088CC" />
                 </RelativeLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Кнопки -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="52dp"
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
@@ -131,23 +136,23 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_marginEnd="8dp"
-                android:text="Сбросить"
+                android:layout_marginEnd="6dp"
+                android:text="Сброс"
                 android:textColor="#FF3B30"
                 app:strokeColor="#FF3B30"
-                app:cornerRadius="12dp" />
+                app:cornerRadius="10dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnPay"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:text="Оплатить (Т-Банк)"
-                android:textSize="18sp"
+                android:text="Оплатить aQsi"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:backgroundTint="#FFDD2D"
                 android:textColor="#000000"
-                app:cornerRadius="12dp" />
+                app:cornerRadius="10dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -156,33 +161,33 @@
         android:layout_height="match_parent"
         android:background="#D1D5DB"/>
 
-    <!-- ПРАВАЯ ПАНЕЛЬ -->
+    <!-- ПРАВАЯ ПАНЕЛЬ: Меню и Настройки (Шестеренка) -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="5.5"
+        android:layout_weight="5.7"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:padding="12dp"
         android:background="#FFFFFF">
 
-        <LinearLayout
+        <!-- Верхняя панель управления с Шестеренкой -->
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="8dp">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_toStartOf="@+id/btnAddNewDish"
+                android:layout_marginEnd="8dp"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etSearchDish"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Быстрый поиск блюда..."
+                    android:hint="Быстрый поиск..."
                     android:inputType="text"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -191,16 +196,30 @@
                 style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:text="+ Добавить"
+                android:layout_toStartOf="@+id/btnSettings"
+                android:layout_marginEnd="8dp"
+                android:layout_centerVertical="true"
+                android:text="+ Блюдо"
                 app:cornerRadius="8dp"/>
-        </LinearLayout>
+
+            <!-- Иконка шестеренки настроек -->
+            <ImageButton
+                android:id="@+id/btnSettings"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Настройки"
+                android:src="@android:drawable/ic_menu_preferences"
+                app:tint="#555555" />
+        </RelativeLayout>
 
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="6dp">
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroupCategories"
