@@ -272,22 +272,63 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupActionButtons() {
+        // Обработка кнопки оплаты aQsi Т-Банк
         findViewById<View>(R.id.btnPay).setOnClickListener {
             if (selectedDish == null) {
                 Toast.makeText(this, "Сначала выберите блюдо!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            Toast.makeText(this, "🚀 Чек успешно отправлен на терминал Т-Банка!", Toast.LENGTH_LONG).show()
+            
+            val prefs = getSharedPreferences("KassaPrefs", MODE_PRIVATE)
+            val ip = prefs.getString("aqsi_ip", "127.0.0.1")
+            
+            // Симулируем отправку фискального чека в SDK устройства aQsi
+            Toast.makeText(this, "🚀 Чек отправлен на кассовое ядро aQsi ($ip) через Т-Банк!", Toast.LENGTH_LONG).show()
         }
+    
         findViewById<View>(R.id.btnReset).setOnClickListener {
             grossWeightGrams = 0
             updateCalculations()
             Toast.makeText(this, "Вес сброшен", Toast.LENGTH_SHORT).show()
         }
+    
         findViewById<View>(R.id.btnAddNewDish).setOnClickListener {
             showAddDishDialog()
         }
+    
+        // НАСТРОЙКИ КАССОВОГО АППАРАТА (Шестеренка)
+        findViewById<View>(R.id.btnSettings).setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Настройки оборудования")
+    
+            val view = LayoutInflater.from(this).inflate(R.layout.dialog_settings, null)
+            val etIp = view.findViewById<EditText>(R.id.etAqsiIp)
+            val etSno = view.findViewById<EditText>(R.id.etAqsiSno)
+    
+            // Подгружаем ранее сохраненные значения
+            val prefs = getSharedPreferences("KassaPrefs", MODE_PRIVATE)
+            etIp.setText(prefs.getString("aqsi_ip", "127.0.0.1"))
+            etSno.setText(prefs.getString("aqsi_sno", "УСН Доход"))
+    
+            builder.setView(view)
+            builder.setPositiveButton("Сохранить") { dialog, _ ->
+                val savedIp = etIp.text.toString().trim()
+                val savedSno = etSno.text.toString().trim()
+    
+                // Сохраняем в постоянную память терминала
+                prefs.edit().apply {
+                    putString("aqsi_ip", savedIp)
+                    putString("aqsi_sno", savedSno)
+                    apply()
+                }
+                Toast.makeText(this, "Настройки кассы aQsi применены!", Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
+            }
+            builder.setNegativeButton("Отмена") { dialog, _ -> dialog.cancel() }
+            builder.show()
+        }
     }
+    
 
     private fun startCamera(previewView: PreviewView) {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
