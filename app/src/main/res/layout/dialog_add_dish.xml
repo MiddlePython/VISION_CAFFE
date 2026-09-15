@@ -3,52 +3,57 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:padding="20dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Наименование блюда"
+        android:text="Что вы хотите добавить?"
+        android:textStyle="bold"
         android:textSize="14sp"
         android:textColor="#555555"
-        android:layout_marginBottom="4dp"/>
+        android:layout_marginBottom="8dp"/>
+
+    <RadioGroup
+        android:id="@+id/rgCreateType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+        <RadioButton
+            android:id="@+id/rbTypeDish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Новое блюдо"
+            android:checked="true"/>
+        <RadioButton
+            android:id="@+id/rbTypePlate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Шаблон тары"/>
+    </RadioGroup>
 
     <EditText
         android:id="@+id/etNewDishName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Например: Плов с курицей"
-        android:inputType="textCapWords"
-        android:layout_marginBottom="16dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Категория"
-        android:textSize="14sp"
-        android:textColor="#555555"
-        android:layout_marginBottom="4dp"/>
+        android:hint="Название (например: Тарелка стеклянная)"
+        android:inputType="textCapWords" />
 
     <EditText
         android:id="@+id/etNewDishCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Супы, Горячее, Гарниры, Салаты"
-        android:inputType="textCapWords"
-        android:layout_marginBottom="16dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Цена за 100 грамм (₽)"
-        android:textSize="14sp"
-        android:textColor="#555555"
-        android:layout_marginBottom="4dp"/>
+        android:layout_marginTop="12dp"
+        android:hint="Категория (Супы, Горячее, Салаты)"
+        android:inputType="textCapWords" />
 
     <EditText
         android:id="@+id/etNewDishPrice100g"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Например: 60.00"
-        android:inputType="numberDecimal"/>
+        android:layout_marginTop="12dp"
+        android:hint="Цена за 100 грамм (в ₽)"
+        android:inputType="numberDecimal" />
 </LinearLayout>
