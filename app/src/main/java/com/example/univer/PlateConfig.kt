@@ -7,20 +7,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 
-// 1. Модель данных для тары
-data class TarePlate(
-    val id: String,
-    val name: String,
-    val weightGrams: Int
-)
-
-// 2. Простой адаптер для горизонтального выбора тарелок кассиром
 class SimplePlatesAdapter(
-    private val plates: List<TarePlate>,
-    private val onPlateSelected: (TarePlate) -> Unit
+    private var plates: List<PlateEntity>,
+    private val onPlateSelected: (PlateEntity) -> Unit
 ) : RecyclerView.Adapter<SimplePlatesAdapter.PlateViewHolder>() {
 
-    private var selectedIndex = 0 // По умолчанию выбрана первая тара (Глубокая - 220г)
+    private var selectedIndex = 0
 
     class PlateViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val card: MaterialCardView = v.findViewById(R.id.cardPlate)
@@ -38,7 +30,6 @@ class SimplePlatesAdapter(
         holder.tvName.text = plate.name
         holder.tvWeight.text = "${plate.weightGrams} г"
 
-        // Визуальное выделение выбранной тары в стиле iiko
         val isSelected = position == selectedIndex
         holder.card.strokeColor = if (isSelected) android.graphics.Color.parseColor("#0088CC") else android.graphics.Color.parseColor("#E5E7EB")
         holder.card.strokeWidth = if (isSelected) 4 else 1
@@ -54,4 +45,9 @@ class SimplePlatesAdapter(
     }
 
     override fun getItemCount() = plates.size
+
+    fun updateData(newPlates: List<PlateEntity>) {
+        this.plates = newPlates
+        notifyDataSetChanged()
+    }
 }
