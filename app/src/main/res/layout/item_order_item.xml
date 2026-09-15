@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://android.com"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:background="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toStartOf="@+id/btnRemoveItem"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true">
+        
+        <TextView
+            android:id="@+id/tvOrderItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Наименование блюда"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#212121"/>
+        
+        <TextView
+            android:id="@+id/tvOrderItemDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="150 г x 0.45 ₽/г"
+            android:textSize="12sp"
+            android:textColor="#666666"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvOrderItemPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/btnRemoveItem"
+        android:layout_marginEnd="12dp"
+        android:layout_centerVertical="true"
+        android:text="67.50 ₽"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="#212121"/>
+
+    <ImageButton
+        android:id="@+id/btnRemoveItem"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Удалить"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:tint="#FF3B30"/>
+</RelativeLayout>
